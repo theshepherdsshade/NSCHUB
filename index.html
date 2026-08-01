@@ -18,14 +18,20 @@
   --purple:rgba(126,34,206,.11);--purple-c:#7E22CE;
   --text:#1B2333;--text2:#54617A;--text3:#8791A3;
   --mono:'DM Mono','JetBrains Mono',monospace;
+  --shadow-xs:0 1px 2px rgba(23,30,46,.04);
+  --shadow-sm:0 1px 2px rgba(23,30,46,.04),0 2px 6px rgba(23,30,46,.05);
+  --shadow-md:0 2px 4px rgba(23,30,46,.05),0 8px 20px rgba(23,30,46,.07);
+  --shadow-lg:0 8px 16px rgba(23,30,46,.08),0 20px 48px rgba(23,30,46,.14);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;min-height:100vh;font-size:15px;}
 button{font-family:'Inter',sans-serif;cursor:pointer;}
 input,textarea,select{font-family:'Inter',sans-serif;}
 a{color:var(--blue);}
-.day-col,.event-card,.outlook-card,.briefing-strip,.about-card,.ctable,.carry-tray,.etd,.ts-item,.bd-item,.cal-ev-row,.hero-card,.hero-stat{box-shadow:0 1px 3px rgba(27,35,51,.05);}
-.day-col:hover,.event-card:hover{box-shadow:0 2px 8px rgba(27,35,51,.07);}
+.day-col,.event-card,.outlook-card,.briefing-strip,.about-card,.ctable,.carry-tray,.etd,.ts-item,.bd-item,.cal-ev-row,.hero-card,.hero-stat{box-shadow:var(--shadow-sm);}
+.event-card{transition:box-shadow .15s;}
+.day-col:hover,.event-card:hover{box-shadow:var(--shadow-md);}
 
 /* ── TOPBAR ── */
 .topbar{background:var(--surface);border-bottom:1px solid var(--border);height:56px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40;flex-shrink:0;}
@@ -39,8 +45,9 @@ a{color:var(--blue);}
 .sync-pill{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--text3);background:var(--surf3);border:1px solid var(--border);padding:3px 10px;border-radius:20px;transition:all .2s;}
 .sync-pill.ok{color:var(--green);border-color:rgba(34,197,94,.3);background:var(--grn-dim);}
 .sync-pill.err{color:var(--red);border-color:rgba(239,68,68,.3);background:var(--red-dim);}
-.fab{background:var(--blue);border:none;color:white;width:34px;height:34px;border-radius:8px;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;transition:background .15s;font-weight:300;}
-.fab:hover{background:var(--blue-mid);}
+.fab{background:var(--blue);border:none;color:white;width:34px;height:34px;border-radius:9px;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;transition:all .15s;font-weight:300;box-shadow:0 2px 6px rgba(37,99,235,.3);}
+.fab:hover{background:var(--blue-mid);transform:translateY(-1px);box-shadow:0 4px 12px rgba(37,99,235,.35);}
+.fab:active{transform:translateY(0) scale(.95);}
 
 /* ── SHELL ── */
 .shell{display:flex;flex:1;}
@@ -49,12 +56,15 @@ a{color:var(--blue);}
 .sidebar{width:220px;background:var(--surface);border-right:1px solid var(--border);flex-shrink:0;padding:14px 8px 24px;display:flex;flex-direction:column;gap:1px;}
 .nav-sec{font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);padding:14px 10px 5px;}
 .nav-sec:first-child{padding-top:4px;}
-.nav-btn{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:6px;color:var(--text2);font-size:14px;font-weight:500;border:none;background:none;width:100%;text-align:left;transition:all .12s;}
+.nav-btn{display:flex;align-items:center;gap:10px;padding:9px 10px 9px 8px;border-radius:0 7px 7px 0;color:var(--text2);font-size:14px;font-weight:500;border:none;border-left:3px solid transparent;background:none;width:100%;text-align:left;transition:all .12s;}
 .nav-btn:hover{background:var(--surf3);color:var(--text);}
-.nav-btn.active{background:var(--blue-dim);color:var(--blue);font-weight:600;}
-.nav-btn .ico{font-size:15px;width:18px;text-align:center;flex-shrink:0;}
+.nav-btn.active{background:var(--blue-dim);color:var(--blue);font-weight:600;border-left-color:var(--blue);}
+.nav-btn .ico{width:18px;height:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--text3);transition:color .12s;}
+.nav-btn .ico svg{width:16px;height:16px;}
+.nav-btn:hover .ico{color:var(--text2);}
+.nav-btn.active .ico{color:var(--blue);}
 .nav-badge{margin-left:auto;background:var(--red);color:white;font-family:var(--mono);font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;}
-.pulse-panel{margin-top:16px;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.pulse-panel{margin-top:16px;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
 .pp-head{font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);padding:8px 12px 6px;background:var(--surf3);border-bottom:1px solid var(--border);}
 .pp-row{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;border-bottom:1px solid var(--border);}
 .pp-row:last-child{border-bottom:none;}
@@ -68,8 +78,8 @@ a{color:var(--blue);}
 .main{flex:1;padding:20px 22px 80px;overflow-y:auto;}
 .page{display:none;}
 .page.active{display:block;}
-.eyebrow{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:4px;}
-.page-title{font-size:24px;font-weight:800;color:var(--text);margin-bottom:18px;letter-spacing:-.5px;}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin-bottom:6px;}
+.page-title{font-size:27px;font-weight:800;color:var(--text);margin-bottom:20px;letter-spacing:-.6px;}
 .sec{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:24px 0 10px;display:flex;align-items:center;gap:10px;}
 .sec .ln{flex:1;height:1px;background:var(--border);}
 
@@ -79,10 +89,11 @@ a{color:var(--blue);}
 .week-page-head .wph-range{font-family:var(--mono);font-size:12px;color:var(--text3);letter-spacing:.02em;}
 
 /* ── BUTTONS ── */
-.btn{border:1px solid var(--border);background:var(--surf2);color:var(--text2);font-size:13px;font-weight:600;padding:7px 14px;border-radius:6px;display:inline-flex;align-items:center;gap:6px;transition:all .12s;}
+.btn{border:1px solid var(--border);background:var(--surf2);color:var(--text2);font-size:13px;font-weight:600;padding:7px 14px;border-radius:7px;display:inline-flex;align-items:center;gap:6px;transition:all .12s;}
 .btn:hover{border-color:var(--border2);color:var(--text);background:var(--surf3);}
-.btn-blue{background:var(--blue);border-color:var(--blue);color:white;}
-.btn-blue:hover{background:var(--blue-mid);border-color:var(--blue-mid);color:white;}
+.btn:active{transform:scale(.97);}
+.btn-blue{background:var(--blue);border-color:var(--blue);color:white;box-shadow:0 1px 2px rgba(37,99,235,.2),0 3px 8px rgba(37,99,235,.15);}
+.btn-blue:hover{background:var(--blue-mid);border-color:var(--blue-mid);color:white;box-shadow:0 2px 4px rgba(37,99,235,.25),0 5px 12px rgba(37,99,235,.2);}
 .btn-danger:hover{border-color:var(--red);color:var(--red);}
 .btn-sm{font-size:12px;padding:5px 10px;}
 
@@ -106,7 +117,7 @@ a{color:var(--blue);}
 .briefing-toggle:hover{color:var(--text2);}
 
 /* ── CARRY TRAY ── */
-.carry-tray{background:var(--amb-dim);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:14px 16px;margin-bottom:16px;}
+.carry-tray{background:var(--amb-dim);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:14px 16px;margin-bottom:16px;}
 .carry-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;}
 .carry-sub{font-size:13px;color:var(--text2);margin-bottom:12px;}
 .carry-item{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;background:var(--surface);border-radius:6px;margin-bottom:6px;border:1px solid var(--border);}
@@ -119,7 +130,7 @@ a{color:var(--blue);}
 
 /* ── WEEK GRID ── */
 .week-grid{display:flex;flex-direction:column;gap:8px;}
-.day-col{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:opacity .2s;}
+.day-col{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:opacity .2s,box-shadow .15s;}
 .day-col-head{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:var(--surf2);border-bottom:1px solid var(--border);cursor:pointer;gap:10px;transition:background .12s;}
 .day-col-head:hover{background:var(--surf3);}
 .day-col-head.today{background:var(--blue-dim);border-bottom-color:rgba(59,130,246,.3);}
@@ -175,7 +186,7 @@ a{color:var(--blue);}
 .lw-item.done{color:var(--text3);}
 
 /* ── EVENT CHECKLISTS ── */
-.event-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:10px;}
+.event-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:10px;}
 .ec-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surf2);border-bottom:1px solid var(--border);cursor:pointer;gap:10px;transition:background .12s;}
 .ec-head:hover{background:var(--surf3);}
 .event-card.collapsed .ec-head{border-bottom:none;}
@@ -244,7 +255,7 @@ a{color:var(--blue);}
 .ec-return-btn:hover{border-color:var(--blue);color:var(--blue);}
 
 /* ── LIVE EVENT TASKS (week page) ── */
-.live-sec{background:var(--blue-dim);border:1px solid rgba(37,99,235,.28);border-radius:8px;padding:14px 16px;margin-bottom:16px;}
+.live-sec{background:var(--blue-dim);border:1px solid rgba(37,99,235,.28);border-radius:10px;padding:14px 16px;margin-bottom:16px;}
 .live-sec-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;display:flex;align-items:center;gap:7px;}
 .live-sec-sub{font-size:13px;color:var(--text2);margin-bottom:12px;}
 .lev-group{margin-bottom:12px;}
@@ -272,7 +283,7 @@ a{color:var(--blue);}
 .pick-item:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-dim);}
 
 /* ── TASKS DUE ── */
-.etd{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:13px 16px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;}
+.etd{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 16px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;}
 .etd-left{flex:1;min-width:0;}
 .etd-title{font-size:15px;font-weight:600;color:var(--text);}
 .etd-from{font-family:var(--mono);font-size:12px;color:var(--text3);margin-top:4px;}
@@ -315,7 +326,7 @@ a{color:var(--blue);}
 .cal-ev-tmpl:hover{background:rgba(59,130,246,.2);}
 
 /* ── TO SORT ── */
-.ts-item{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;}
+.ts-item{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;}
 .ts-body{flex:1;min-width:0;}
 .ts-text{font-size:15px;font-weight:600;color:var(--text);}
 .ts-time{font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:3px;}
@@ -325,16 +336,20 @@ a{color:var(--blue);}
 .ts-dismiss{background:none;border:none;color:var(--text3);font-size:18px;padding:2px 5px;}
 .ts-dismiss:hover{color:var(--red);}
 .ts-empty{text-align:center;padding:48px 20px;color:var(--text3);font-size:14px;}
+.empty-state{text-align:center;padding:52px 20px;color:var(--text3);font-size:14px;}
+.empty-state .es-ico{width:40px;height:40px;margin:0 auto 14px;color:var(--border2);}
+.empty-state .es-ico svg{width:100%;height:100%;}
 
 /* ── CONTACTS ── */
 .csearch{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:9px 14px;margin-bottom:16px;}
 .csearch input{border:none;outline:none;font-size:14px;flex:1;background:transparent;color:var(--text);}
 .csearch input::placeholder{color:var(--text3);}
-.ctable{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.ctable{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
 .crow{display:flex;flex-wrap:wrap;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);gap:10px;font-size:14px;}
 .crow:last-child{border-bottom:none;}
 .crow.hidden{display:none;}
-.crow-name{font-weight:700;color:var(--text);min-width:150px;}
+.crow-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;flex-shrink:0;}
+.crow-name{font-weight:700;color:var(--text);min-width:130px;}
 .crow-who{color:var(--text2);flex:1;min-width:120px;}
 .crow-phone{font-family:var(--mono);color:var(--blue);font-weight:600;font-size:13px;}
 .crow-custom .crow-name::after{content:'·';color:var(--sage);margin-left:6px;}
@@ -343,7 +358,7 @@ a{color:var(--blue);}
 .crow-addrow{justify-content:flex-start;background:var(--surf2);}
 
 /* ── ABOUT ── */
-.about-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.about-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
 .about-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
 .about-k{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);min-width:70px;}
 .about-v{flex:1;font-size:14px;color:var(--text);word-break:break-all;min-width:120px;}
@@ -353,7 +368,7 @@ a{color:var(--blue);}
 .bd-search{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:9px 14px;margin-bottom:14px;}
 .bd-search input{border:none;outline:none;font-size:14px;flex:1;background:transparent;color:var(--text);}
 .bd-search input::placeholder{color:var(--text3);}
-.bd-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:13px 16px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px;}
+.bd-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 16px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px;}
 .bd-item.hidden{display:none;}
 .bd-text{flex:1;font-size:15px;color:var(--text);line-height:1.45;}
 .bd-time{font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:4px;}
@@ -416,7 +431,9 @@ a{color:var(--blue);}
 /* ── PRESENCE BANNER ── */
 .presence-banner{background:var(--blue-dim);border-bottom:1px solid rgba(37,99,235,.22);padding:8px 20px;display:flex;align-items:center;gap:10px;position:sticky;top:56px;z-index:39;flex-wrap:wrap;}
 .presence-banner.urgent{background:var(--amb-dim);border-bottom-color:rgba(217,119,6,.3);}
-.pb-ico{font-size:15px;flex-shrink:0;}
+.pb-ico{width:16px;height:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--blue);}
+.presence-banner.urgent .pb-ico{color:var(--amber);}
+.pb-ico svg{width:100%;height:100%;}
 .pb-text{font-size:13px;font-weight:600;color:var(--text);flex:1;min-width:0;}
 .pb-text b{color:var(--blue);}
 .presence-banner.urgent .pb-text b{color:var(--amber);}
@@ -437,7 +454,7 @@ a{color:var(--blue);}
 .hero-progress-fill.done{background:var(--green);}
 .hero-sub{font-size:12px;color:var(--text3);margin:7px 0 16px;}
 .hero-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
-.hero-stat{flex:1;min-width:110px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px 12px;}
+.hero-stat{flex:1;min-width:110px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:9px 12px;}
 .hero-stat-lbl{font-family:var(--mono);font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);}
 .hero-stat-val{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--text);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .hero-stat-val.a{color:var(--amber);}
@@ -470,10 +487,11 @@ a{color:var(--blue);}
 /* ── BOTTOM NAV ── */
 .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);padding:8px 6px max(10px,env(safe-area-inset-bottom));z-index:35;justify-content:space-around;align-items:center;}
 .bn-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:var(--text3);padding:6px 10px;border-radius:10px;min-width:54px;transition:all .15s;position:relative;}
-.bn-btn .bn-ico{font-size:22px;line-height:1;transition:font-size .15s;}
+.bn-btn .bn-ico{width:22px;height:22px;display:flex;align-items:center;justify-content:center;transition:width .15s,height .15s;}
+.bn-btn .bn-ico svg{width:100%;height:100%;}
 .bn-btn .bn-lbl{font-size:10px;font-weight:600;font-family:var(--mono);letter-spacing:.04em;text-transform:uppercase;}
 .bn-btn.active{color:var(--blue-br);background:rgba(59,130,246,.22);font-weight:700;}
-.bn-btn.active .bn-ico{font-size:24px;}
+.bn-btn.active .bn-ico{width:24px;height:24px;}
 .bn-btn.active .bn-lbl{color:var(--blue-br);}
 .bn-dot{position:absolute;top:4px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--red);border:2px solid var(--surface);}
 
@@ -525,16 +543,16 @@ a{color:var(--blue);}
 <div class="shell">
   <div class="sidebar">
     <div class="nav-sec">Week</div>
-    <button class="nav-btn active" data-page="week"><span class="ico">📅</span> This Week</button>
-    <button class="nav-btn" data-page="tosort"><span class="ico">📋</span> To Sort <span class="nav-badge" id="tsBadge" style="display:none;">0</span></button>
+    <button class="nav-btn active" data-page="week"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/></svg></span> This Week</button>
+    <button class="nav-btn" data-page="tosort"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l1.8 2.5h4.4L16 12h4"/><path d="M5.2 5h13.6L20 12v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6L5.2 5z"/></svg></span> To Sort <span class="nav-badge" id="tsBadge" style="display:none;">0</span></button>
     <div class="nav-sec">Events</div>
-    <button class="nav-btn" data-page="events"><span class="ico">🗓</span> Event Checklists</button>
-    <button class="nav-btn" data-page="taskdue"><span class="ico">⏱</span> Tasks Coming Due</button>
+    <button class="nav-btn" data-page="events"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 6 1.3 1.3L7.5 4.6"/><path d="M10.5 6h10"/><path d="m3.5 12 1.3 1.3 2.7-2.7"/><path d="M10.5 12h10"/><path d="m3.5 18 1.3 1.3 2.7-2.7"/><path d="M10.5 18h10"/></svg></span> Event Checklists</button>
+    <button class="nav-btn" data-page="taskdue"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3.2 2"/></svg></span> Tasks Coming Due</button>
     <div class="nav-sec">Calendar</div>
-    <button class="nav-btn" data-page="calendar"><span class="ico">📆</span> Team Calendar</button>
+    <button class="nav-btn" data-page="calendar"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><circle cx="8" cy="15" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="15" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="15" r="1" fill="currentColor" stroke="none"/></svg></span> Team Calendar</button>
     <div class="nav-sec">Reference</div>
-    <button class="nav-btn" data-page="contacts"><span class="ico">📞</span> Contacts</button>
-    <button class="nav-btn" data-page="braindump"><span class="ico">🧠</span> Brain Dump</button>
+    <button class="nav-btn" data-page="contacts"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 3.5h2.7l1.3 3.6-1.9 1.7a12.4 12.4 0 0 0 5.6 5.6l1.7-1.9 3.6 1.3v2.7a1.5 1.5 0 0 1-1.6 1.5A16.5 16.5 0 0 1 4.5 5.1a1.5 1.5 0 0 1 1.5-1.6z"/></svg></span> Contacts</button>
+    <button class="nav-btn" data-page="braindump"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M11 2.5c.4 2.6 1 4.1 2 5.1s2.5 1.6 5.1 2c-2.6.4-4.1 1-5.1 2s-1.6 2.5-2 5.1c-.4-2.6-1-4.1-2-5.1s-2.5-1.6-5.1-2c2.6-.4 4.1-1 5.1-2s1.6-2.5 2-5.1z"/><path d="M18.5 15.2c.2 1.3.5 2 1 2.6.5.5 1.2.8 2.6 1-1.3.2-2 .5-2.6 1-.5.5-.8 1.2-1 2.6-.2-1.3-.5-2-1-2.6-.5-.5-1.2-.8-2.6-1 1.3-.2 2-.5 2.6-1 .5-.5.8-1.2 1-2.6z"/></svg></span> Brain Dump</button>
     <div class="pulse-panel">
       <div class="pp-head">Status</div>
       <div class="pp-row"><span class="pp-k">Done today</span><span class="pp-v s" id="pulseDone">— / —</span></div>
@@ -771,11 +789,11 @@ a{color:var(--blue);}
 </div>
 
 <div class="bottom-nav">
-  <button class="bn-btn active" data-page="week"><span class="bn-ico">📅</span><span class="bn-lbl">Week</span></button>
-  <button class="bn-btn" data-page="tosort"><span class="bn-ico">📋</span><span class="bn-lbl">To Sort</span><span class="bn-dot" id="bnTsDot" style="display:none;"></span></button>
-  <button class="bn-btn" data-page="events"><span class="bn-ico">🗓</span><span class="bn-lbl">Events</span></button>
-  <button class="bn-btn" data-page="calendar"><span class="bn-ico">📆</span><span class="bn-lbl">Calendar</span></button>
-  <button class="bn-btn" data-page="contacts"><span class="bn-ico">📞</span><span class="bn-lbl">Contacts</span></button>
+  <button class="bn-btn active" data-page="week"><span class="bn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/></svg></span><span class="bn-lbl">Week</span></button>
+  <button class="bn-btn" data-page="tosort"><span class="bn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l1.8 2.5h4.4L16 12h4"/><path d="M5.2 5h13.6L20 12v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6L5.2 5z"/></svg></span><span class="bn-lbl">To Sort</span><span class="bn-dot" id="bnTsDot" style="display:none;"></span></button>
+  <button class="bn-btn" data-page="events"><span class="bn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 6 1.3 1.3L7.5 4.6"/><path d="M10.5 6h10"/><path d="m3.5 12 1.3 1.3 2.7-2.7"/><path d="M10.5 12h10"/><path d="m3.5 18 1.3 1.3 2.7-2.7"/><path d="M10.5 18h10"/></svg></span><span class="bn-lbl">Events</span></button>
+  <button class="bn-btn" data-page="calendar"><span class="bn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><circle cx="8" cy="15" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="15" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="15" r="1" fill="currentColor" stroke="none"/></svg></span><span class="bn-lbl">Calendar</span></button>
+  <button class="bn-btn" data-page="contacts"><span class="bn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 3.5h2.7l1.3 3.6-1.9 1.7a12.4 12.4 0 0 0 5.6 5.6l1.7-1.9 3.6 1.3v2.7a1.5 1.5 0 0 1-1.6 1.5A16.5 16.5 0 0 1 4.5 5.1a1.5 1.5 0 0 1 1.5-1.6z"/></svg></span><span class="bn-lbl">Contacts</span></button>
 </div>
 <div class="toast" id="toastEl"></div>
 
@@ -1299,7 +1317,7 @@ function renderPresenceBanner(){
   const whenLbl=fmtPresenceWhen(next.daysOut,next.date);
   const timeLbl=next.time?' · '+next.time:'';
   const afterLbl=upcoming[1]?'then '+fmtPresenceWhen(upcoming[1].daysOut,upcoming[1].date)+': '+upcoming[1].label:'';
-  el.innerHTML='<span class="pb-ico">⛪</span>'+
+  el.innerHTML='<span class="pb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M9.5 8V6l2.5-1.7L14.5 6v2"/><path d="M5 21V11l7-3.5L19 11v10"/><path d="M9.5 21v-6h5v6"/></svg></span>'+
     '<span class="pb-text">Next at church: <b>'+esc(whenLbl)+'</b> — '+esc(next.label)+esc(timeLbl)+'</span>'+
     (afterLbl?'<span class="pb-sub">'+esc(afterLbl)+'</span>':'')+
     '<span class="pb-chip">'+(next.daysOut===0?'today':next.daysOut+'d')+'</span>';
@@ -1828,7 +1846,7 @@ function updateTsBadge(){
 function renderToSort(){
   const list=document.getElementById('tsList');if(!list)return;
   updateTsBadge();
-  if(!toSort.length){list.innerHTML='<div class="ts-empty">Nothing to sort — use the + button to capture something on the fly.</div>';return;}
+  if(!toSort.length){list.innerHTML='<div class="empty-state"><div class="es-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l1.8 2.5h4.4L16 12h4"/><path d="M5.2 5h13.6L20 12v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6L5.2 5z"/></svg></div>Nothing to sort — use the + button to capture something on the fly.</div>';return;}
   list.innerHTML=toSort.map((item,idx)=>'<div class="ts-item">'+
     '<div class="ts-body"><div class="ts-text">'+esc(item.text)+'</div><div class="ts-time">'+esc(item.added)+'</div>'+
     '<div class="ts-acts">'+
@@ -1862,7 +1880,7 @@ function renderBrainDump(){
   const list=document.getElementById('bdList');if(!list)return;
   const q=(document.getElementById('bdSearch')||{}).value||'';
   const filtered=brainDump.filter(i=>!q||i.text.toLowerCase().includes(q.toLowerCase()));
-  if(!brainDump.length){list.innerHTML='<div class="bd-empty">Nothing here yet — add anything on your mind.</div>';return;}
+  if(!brainDump.length){list.innerHTML='<div class="empty-state"><div class="es-ico"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M11 2.5c.4 2.6 1 4.1 2 5.1s2.5 1.6 5.1 2c-2.6.4-4.1 1-5.1 2s-1.6 2.5-2 5.1c-.4-2.6-1-4.1-2-5.1s-2.5-1.6-5.1-2c2.6-.4 4.1-1 5.1-2s1.6-2.5 2-5.1z"/></svg></div>Nothing here yet — add anything on your mind.</div>';return;}
   if(!filtered.length){list.innerHTML='<div class="bd-empty">No results for "'+esc(q)+'"</div>';return;}
   list.innerHTML=filtered.map((item,idx)=>'<div class="bd-item">'+
     '<div style="flex:1"><div class="bd-text">'+esc(item.text)+'</div><div class="bd-time">Added '+esc(item.added)+'</div>'+
@@ -1944,9 +1962,22 @@ document.getElementById('daySheet').addEventListener('click',e=>{if(e.target.id=
 const TROUBLE=[{n:'Rock',w:'Shannon Haskins, Bekah Reedy',p:''},{n:'Ramp',w:'Angela Taunton',p:''},{n:'POs / vendor payments',w:'Linda Whitehead',p:''},{n:'Courier orders',w:'Jack Nelson',p:''}];
 const CATERING=[{n:'Lickin Good Donuts',w:'Sopheai · text orders',p:'205-926-8943'},{n:'Panera',w:'Murphy · order online',p:'205-936-9904'},{n:'Whataburger 280',w:'Jamira · text orders',p:'601-559-2183'},{n:'Chick-fil-A',w:'Donna · text orders',p:'205-837-7533'},{n:'Publix (Trace Crossings)',w:'Denise, Lindsey, Chelsea',p:'205-848-4064'},{n:'Panda Express',w:'Maria · text orders',p:'205-800-3246'},{n:"Domino's",w:'Order online',p:'205-663-9425'},{n:'Full Moon BBQ',w:'Matthew',p:'251-233-9293'},{n:"Anna Cat's Catering",w:'Ashley Collins · call in, pay at delivery',p:'334-322-1719'},{n:'Ladybird Tacos',w:'Rocio Gallego · email orders',p:''},{n:'Cracker Barrel',w:'Kelly Chapman',p:'615-706-9685'},{n:"Shipley's Donuts",w:'Ricki',p:'205-613-1913'}];
 const CONTACT_SECTIONS=[{key:'trouble',el:'ctrouble',defaults:TROUBLE},{key:'catering',el:'ccatering',defaults:CATERING}];
+const AVATAR_PALETTE=[['var(--blue-dim)','var(--blue)'],['var(--sage-dim)','var(--sage)'],['var(--purple)','var(--purple-c)'],['var(--amb-dim)','var(--amber)'],['var(--grn-dim)','var(--green)']];
+function avatarInitials(name){
+  const parts=(name||'').trim().split(/\s+/).filter(Boolean);
+  if(!parts.length)return '?';
+  if(parts.length===1)return parts[0].slice(0,2).toUpperCase();
+  return (parts[0][0]+parts[1][0]).toUpperCase();
+}
+function avatarColor(name){
+  let h=0;for(let i=0;i<(name||'').length;i++)h=(h*31+name.charCodeAt(i))>>>0;
+  return AVATAR_PALETTE[h%AVATAR_PALETTE.length];
+}
 function contactRowHTML(c,section,isCustom,refKey){
   const s=(c.n+' '+c.w+' '+(c.p||'')).toLowerCase();
+  const av=avatarColor(c.n);
   return '<div class="crow'+(isCustom?' crow-custom':'')+'" data-s="'+esc(s)+'">'+
+    '<div class="crow-avatar" style="background:'+av[0]+';color:'+av[1]+';">'+esc(avatarInitials(c.n))+'</div>'+
     '<div class="crow-name">'+esc(c.n)+'</div>'+
     '<div class="crow-who">'+esc(c.w)+'</div>'+
     (c.p?'<div class="crow-phone">'+esc(c.p)+'</div>':'')+
