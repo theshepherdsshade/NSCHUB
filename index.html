@@ -429,6 +429,43 @@ a{color:var(--blue);}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(12px);opacity:0;background:var(--surf3);color:var(--text);border:1px solid var(--border);padding:10px 18px;border-radius:8px;font-size:14px;font-weight:600;transition:all .22s;z-index:100;pointer-events:none;box-shadow:0 8px 24px rgba(27,35,51,.16);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
+/* ── PRESENCE BANNER ── */
+.presence-banner{background:var(--blue-dim);border-bottom:1px solid rgba(37,99,235,.22);padding:8px 20px;display:flex;align-items:center;gap:10px;position:sticky;top:56px;z-index:39;flex-wrap:wrap;}
+.presence-banner.urgent{background:var(--amb-dim);border-bottom-color:rgba(217,119,6,.3);}
+.pb-ico{font-size:15px;flex-shrink:0;}
+.pb-text{font-size:13px;font-weight:600;color:var(--text);flex:1;min-width:0;}
+.pb-text b{color:var(--blue);}
+.presence-banner.urgent .pb-text b{color:var(--amber);}
+.pb-sub{font-family:var(--mono);font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:38vw;}
+.pb-chip{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--blue);background:var(--surface);border:1px solid rgba(37,99,235,.25);padding:2px 9px;border-radius:12px;white-space:nowrap;flex-shrink:0;}
+.presence-banner.urgent .pb-chip{color:var(--amber);border-color:rgba(217,119,6,.3);}
+
+/* ── SNAPSHOT STRIP ── */
+.snapshot-strip{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.snap-tile{flex:1;min-width:128px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px 14px;}
+.snap-label{font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:4px;}
+.snap-value{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--text);line-height:1.15;}
+.snap-value.a{color:var(--amber);}
+.snap-value.r{color:var(--red);}
+.snap-value.s{color:var(--green);}
+.snap-sub{font-size:11px;color:var(--text3);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/* ── OUTLOOK ── */
+.outlook-strip{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.outlook-card{flex:1;min-width:220px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 15px;}
+.outlook-card.now{border-color:rgba(37,99,235,.35);box-shadow:0 0 0 1px rgba(37,99,235,.12);}
+.ol-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px;}
+.ol-when{font-size:13px;font-weight:700;color:var(--text);}
+.ol-range{font-family:var(--mono);font-size:10.5px;color:var(--text3);}
+.ol-sun{font-size:12.5px;color:var(--sage);font-weight:600;margin-bottom:5px;}
+.ol-mon{font-size:12px;color:var(--purple-c);margin-bottom:7px;}
+.ol-evs{display:flex;flex-direction:column;gap:4px;}
+.ol-ev{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--text2);}
+.ol-ev .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ol-ev.tent{opacity:.6;font-style:italic;}
+.ol-ev-btn{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--blue);background:var(--blue-dim);border:none;border-radius:4px;padding:2px 7px;cursor:pointer;flex-shrink:0;}
+.ol-empty{font-size:12px;color:var(--text3);font-style:italic;}
+
 /* ── BOTTOM NAV ── */
 .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);padding:8px 6px max(10px,env(safe-area-inset-bottom));z-index:35;justify-content:space-around;align-items:center;}
 .bn-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:var(--text3);padding:6px 10px;border-radius:10px;min-width:54px;transition:all .15s;position:relative;}
@@ -452,6 +489,11 @@ a{color:var(--blue);}
   .briefing-chips{gap:6px;}
   .b-chip{font-size:12px;padding:4px 9px;}
   .di-del{opacity:1;}
+  .presence-banner{padding:7px 12px;top:56px;}
+  .pb-sub{display:none;}
+  .snapshot-strip{gap:8px;}
+  .snap-tile{min-width:44%;padding:9px 11px;}
+  .outlook-strip{flex-direction:column;}
 }
 @media print{
   .topbar,.sidebar,.fab,.day-add,.ec-add,.ec-btns,.ec-tools,.btn,.tmpl-grid,.cap-overlay,.modal-ov,.bottom-nav,.sheet-ov,.crow-edit,.crow-addrow{display:none!important;}
@@ -476,6 +518,7 @@ a{color:var(--blue);}
     <button class="fab" id="fabBtn" title="Quick capture (Cmd/Ctrl+K)">+</button>
   </div>
 </div>
+<div class="presence-banner" id="presenceBanner" style="display:none;"></div>
 
 <div class="shell">
   <div class="sidebar">
@@ -507,6 +550,7 @@ a{color:var(--blue);}
         <h1 id="weekPageTitle">This Week</h1>
         <span class="wph-range" id="weekHeadRange"></span>
       </div>
+      <div id="weekSnapshotStrip"></div>
       <div class="briefing-strip" id="briefingStrip">
         <div class="briefing-top">
           <div class="briefing-chips" id="briefingChips"></div>
@@ -518,6 +562,7 @@ a{color:var(--blue);}
         </div>
         <button class="briefing-toggle" id="briefingToggle">▾ Notes from Elizabeth & Central</button>
       </div>
+      <div id="outlookStrip"></div>
       <div id="upcomingStrip"></div>
       <div id="liveEventsWrap"></div>
       <div id="carryTrayWrap"></div>
@@ -834,13 +879,13 @@ CAL_EVENTS.forEach(e=>{if(!CAL_BY_DATE[e.date])CAL_BY_DATE[e.date]=[];CAL_BY_DAT
 // ── CALENDAR INTELLIGENCE ──
 function getThisWeekSunday(){const s=new Date(WMON);s.setDate(s.getDate()+6);return s;}
 function getStepForDate(d){const key=dateKey(d);const evs=CAL_BY_DATE[key]||[];for(const e of evs){if(e.step){const m=e.name.match(/Step (\d)/);if(m)return 'Step '+m[1];}}return null;}
-function getThisWeekEvents(){
+function getThisWeekEvents(mon=WMON){
   const results=[];const skip=['Support Team','SGLT','Office Closed','First Saturday','All Team','Easter Call','Christmas Call','Marriage Call'];
-  for(let i=0;i<=6;i++){const d=new Date(WMON);d.setDate(d.getDate()+i);const key=dateKey(d);(CAL_BY_DATE[key]||[]).forEach(e=>{if(!e.step&&!skip.some(s=>e.name.includes(s)))results.push({...e,dayName:DAYS_S[d.getDay()]});});}
+  for(let i=0;i<=6;i++){const d=new Date(mon);d.setDate(d.getDate()+i);const key=dateKey(d);(CAL_BY_DATE[key]||[]).forEach(e=>{if(!e.step&&!skip.some(s=>e.name.includes(s)))results.push({...e,dayName:DAYS_S[d.getDay()],dateObj:d});});}
   return results;
 }
 function getNextSupportTeamMeeting(){const tk=dateKey(TODAY);const mtgs=CAL_EVENTS.filter(e=>e.name.includes('Support Team Meeting')&&e.date>=tk).sort((a,b)=>a.date.localeCompare(b.date));return mtgs.length?mtgs[0]:null;}
-function isSupportTeamPrepWeek(){const next=getNextSupportTeamMeeting();if(!next)return false;const md=new Date(next.date+'T12:00:00');const days=daysBetween(WMON,md);return days>=1&&days<=7;}
+function isSupportTeamPrepWeek(mon=WMON){const next=getNextSupportTeamMeeting();if(!next)return false;const md=new Date(next.date+'T12:00:00');const days=daysBetween(mon,md);return days>=1&&days<=7;}
 function getFirstWednesdayThisWeek(){
   for(let i=0;i<=6;i++){const d=new Date(WMON);d.setDate(d.getDate()+i);if(d.getDay()===3){const key=dateKey(d);const evs=CAL_BY_DATE[key]||[];if(evs.some(e=>e.name.includes('First Wednesday')))return d;}}
   return null;
@@ -851,9 +896,9 @@ function isFirstWednesdayTodayOrFuture(){
   const t=new Date(TODAY);t.setHours(0,0,0,0);
   return fw.getTime()>=t.getTime();
 }
-function isFirstMondayBeforeFirstTuesday(){const month=WMON.getMonth();const year=WMON.getFullYear();const firstTue=new Date(year,month,1);while(firstTue.getDay()!==2)firstTue.setDate(firstTue.getDate()+1);return WMON.getDate()<firstTue.getDate();}
-function isLastWeekOfMonth(){const nextMon=new Date(WMON);nextMon.setDate(nextMon.getDate()+7);return nextMon.getMonth()!==WMON.getMonth();}
-function isFourthMonday(){return Math.ceil(WMON.getDate()/7)===4;}
+function isFirstMondayBeforeFirstTuesday(mon=WMON){const month=mon.getMonth();const year=mon.getFullYear();const firstTue=new Date(year,month,1);while(firstTue.getDay()!==2)firstTue.setDate(firstTue.getDate()+1);return mon.getDate()<firstTue.getDate();}
+function isLastWeekOfMonth(mon=WMON){const nextMon=new Date(mon);nextMon.setDate(nextMon.getDate()+7);return nextMon.getMonth()!==mon.getMonth();}
+function isFourthMonday(mon=WMON){return Math.ceil(mon.getDate()/7)===4;}
 function shouldShowItem(item,dow){
   if(dow===0){
     if(item.tag==='monthly')return isFirstMondayBeforeFirstTuesday();
@@ -864,12 +909,12 @@ function shouldShowItem(item,dow){
   if(dow===2&&item.tag==='monthly')return isFirstWednesdayTodayOrFuture();
   return true;
 }
-function autoDetectMondayTypes(){
+function autoDetectMondayTypes(mon=WMON){
   const types=[];
-  if(isFourthMonday())types.push('4th Monday — Welcome messages + first serve leader follow-ups');
-  if(isFirstMondayBeforeFirstTuesday())types.push('First Monday before first Tuesday — Connections report');
-  if(isLastWeekOfMonth())types.push('Last week of month — Food planning, POs, vendor outreach, closet check');
-  if(isSupportTeamPrepWeek()){const next=getNextSupportTeamMeeting();const md=new Date(next.date+'T12:00:00');types.push('Support Team meeting prep week — meeting is '+DAYS_S[md.getDay()]+', '+fmt(md));}
+  if(isFourthMonday(mon))types.push('4th Monday — Welcome messages + first serve leader follow-ups');
+  if(isFirstMondayBeforeFirstTuesday(mon))types.push('First Monday before first Tuesday — Connections report');
+  if(isLastWeekOfMonth(mon))types.push('Last week of month — Food planning, POs, vendor outreach, closet check');
+  if(isSupportTeamPrepWeek(mon)){const next=getNextSupportTeamMeeting();const md=new Date(next.date+'T12:00:00');types.push('Support Team meeting prep week — meeting is '+DAYS_S[md.getDay()]+', '+fmt(md));}
   if(!types.length)types.push('Regular Monday');
   return types;
 }
@@ -879,6 +924,36 @@ function getUpcomingEvents(days){
   const results=[];
   for(let i=1;i<=days;i++){const d=new Date(todayStart);d.setDate(d.getDate()+i);const key=dateKey(d);(CAL_BY_DATE[key]||[]).forEach(e=>{if(!e.step&&!skip.some(s=>e.name.includes(s)))results.push({...e,daysOut:i,dateObj:d});});}
   const seen=new Set();return results.filter(e=>{if(seen.has(e.name))return false;seen.add(e.name);return true;});
+}
+
+// ── CHURCH PRESENCE (next required on-site day) ──
+// Sundays always require presence (arrival note below). Fri/Sat only count when
+// a calendar event actually falls on them, since those are normally off days.
+function getNextChurchPresence(limit=3,daysAhead=28){
+  const out=[];
+  const start=new Date(TODAY);start.setHours(0,0,0,0);
+  for(let i=0;i<=daysAhead&&out.length<limit;i++){
+    const d=new Date(start);d.setDate(d.getDate()+i);
+    const jsDow=d.getDay();
+    const dk=dateKey(d);
+    const evs=(CAL_BY_DATE[dk]||[]).filter(e=>!e.name.includes('Support Team')&&!e.name.includes('SGLT'));
+    if(jsDow===0){
+      out.push({date:d,daysOut:i,label:evs.length?evs.map(e=>e.name).join(', '):'Sunday service',time:'Arrive 6:30 AM',kind:'sunday'});
+    } else if((jsDow===5||jsDow===6)&&evs.length){
+      out.push({date:d,daysOut:i,label:evs.map(e=>e.name).join(', '),time:null,kind:'event'});
+    }
+  }
+  return out;
+}
+
+// ── 3-WEEK OUTLOOK ──
+function getWeekSummary(weekOffset){
+  const mon=new Date(WMON);mon.setDate(mon.getDate()+7*weekOffset);
+  const sun=new Date(mon);sun.setDate(sun.getDate()+6);
+  const sundayEvents=(CAL_BY_DATE[dateKey(sun)]||[]);
+  const events=getThisWeekEvents(mon);
+  const mondayTypes=autoDetectMondayTypes(mon);
+  return {weekOffset,mon,sun,sundayEvents,events,mondayTypes};
 }
 
 const AUTO_SUNDAY=getStepForDate(getThisWeekSunday());
@@ -1222,6 +1297,82 @@ function renderUpcomingStrip(){
   }).join('');
   wrap.innerHTML='<div class="upcoming-strip">'+cards+'</div>';
   wrap.querySelectorAll('.ue-tmpl').forEach(btn=>{btn.addEventListener('click',()=>startChecklist(btn.dataset.tmpl));});
+}
+
+// ── PRESENCE BANNER ──
+function fmtPresenceWhen(daysOut,d){
+  if(daysOut===0)return 'Today';
+  if(daysOut===1)return 'Tomorrow';
+  return DAYS_S[d.getDay()===0?6:d.getDay()-1]+' '+fmt(d);
+}
+function renderPresenceBanner(){
+  const el=document.getElementById('presenceBanner');if(!el)return;
+  const upcoming=getNextChurchPresence(2);
+  if(!upcoming.length){el.innerHTML='';el.style.display='none';return;}
+  const next=upcoming[0];
+  const urgent=next.daysOut<=1;
+  el.className='presence-banner'+(urgent?' urgent':'');
+  el.style.display='flex';
+  const whenLbl=fmtPresenceWhen(next.daysOut,next.date);
+  const timeLbl=next.time?' · '+next.time:'';
+  const afterLbl=upcoming[1]?'then '+fmtPresenceWhen(upcoming[1].daysOut,upcoming[1].date)+': '+upcoming[1].label:'';
+  el.innerHTML='<span class="pb-ico">⛪</span>'+
+    '<span class="pb-text">Next at church: <b>'+esc(whenLbl)+'</b> — '+esc(next.label)+esc(timeLbl)+'</span>'+
+    (afterLbl?'<span class="pb-sub">'+esc(afterLbl)+'</span>':'')+
+    '<span class="pb-chip">'+(next.daysOut===0?'today':next.daysOut+'d')+'</span>';
+}
+
+// ── WEEK SNAPSHOT ──
+function renderSnapshotStrip(){
+  const wrap=document.getElementById('weekSnapshotStrip');if(!wrap)return;
+  let total=0,done=0;
+  WEEK.forEach(day=>{
+    day.items.forEach((item,idx)=>{
+      if(!shouldShowItem(item,day.dow))return;
+      total++;if(checked[day.dow+'_'+idx])done++;
+    });
+  });
+  const pct=total?Math.round(done/total*100):0;
+  const todayDay=WEEK.find(d=>d.dow===DOW);
+  let todayDone=0,todayTotal=0;
+  if(todayDay)todayDay.items.forEach((item,idx)=>{if(!shouldShowItem(item,todayDay.dow))return;todayTotal++;if(checked[todayDay.dow+'_'+idx])todayDone++;});
+  const nextEv=getUpcomingEvents(14)[0];
+  const presence=getNextChurchPresence(1)[0];
+  wrap.innerHTML='<div class="snapshot-strip">'+
+    '<div class="snap-tile"><div class="snap-label">Today</div><div class="snap-value">'+todayDone+' / '+todayTotal+'</div><div class="snap-sub">tasks done</div></div>'+
+    '<div class="snap-tile"><div class="snap-label">Week progress</div><div class="snap-value'+(pct===100&&total?' s':'')+'">'+pct+'%</div><div class="snap-sub">'+done+' of '+total+' this week</div></div>'+
+    '<div class="snap-tile"><div class="snap-label">Carried over</div><div class="snap-value'+(carryItems.length?' a':'')+'">'+carryItems.length+'</div><div class="snap-sub">from last week</div></div>'+
+    '<div class="snap-tile"><div class="snap-label">To sort</div><div class="snap-value'+(toSort.length?' r':'')+'">'+toSort.length+'</div><div class="snap-sub">quick captures</div></div>'+
+    '<div class="snap-tile"><div class="snap-label">Next event</div><div class="snap-value" style="font-size:14px;">'+(nextEv?esc(nextEv.name.slice(0,18)):'—')+'</div><div class="snap-sub">'+(nextEv?nextEv.daysOut+' days away':'nothing on the radar')+'</div></div>'+
+    '<div class="snap-tile"><div class="snap-label">Next at church</div><div class="snap-value" style="font-size:14px;">'+(presence?esc(fmtPresenceWhen(presence.daysOut,presence.date)):'—')+'</div><div class="snap-sub">'+(presence?esc(presence.label.slice(0,26)):'')+'</div></div>'+
+    '</div>';
+}
+
+// ── 3-WEEK OUTLOOK ──
+function renderOutlookStrip(){
+  const wrap=document.getElementById('outlookStrip');if(!wrap)return;
+  const labels=['This week','Next week','In 2 weeks'];
+  const cards=[0,1,2].map(off=>{
+    const s=getWeekSummary(off);
+    const range=fmt(s.mon)+' – '+fmt(s.sun);
+    const sunLbl=s.sundayEvents.length?s.sundayEvents.map(e=>e.name).join(', '):(getStepForDate(s.sun)||'—');
+    const monShort=s.mondayTypes[0]==='Regular Monday'?'':s.mondayTypes.map(m=>{
+      if(m.includes('4th Monday'))return '4th Monday';
+      if(m.includes('First Monday'))return 'Connections week';
+      if(m.includes('Last week'))return 'Last week of month';
+      if(m.includes('Support Team'))return 'Support Team prep';
+      return m;
+    }).join(' · ');
+    const evRows=s.events.length?s.events.map(e=>'<div class="ol-ev'+(e.tentative?' tent':'')+'"><span class="n">'+esc(e.dayName)+' · '+esc(e.name)+'</span>'+(e.template?'<button class="ol-ev-btn" data-tmpl="'+esc(e.template)+'">+</button>':'')+'</div>').join(''):'<div class="ol-empty">No special events</div>';
+    return '<div class="outlook-card'+(off===0?' now':'')+'">'+
+      '<div class="ol-head"><span class="ol-when">'+labels[off]+'</span><span class="ol-range">'+esc(range)+'</span></div>'+
+      '<div class="ol-sun">🌿 Sun: '+esc(sunLbl)+'</div>'+
+      (monShort?'<div class="ol-mon">Mon: '+esc(monShort)+'</div>':'')+
+      '<div class="ol-evs">'+evRows+'</div>'+
+      '</div>';
+  }).join('');
+  wrap.innerHTML='<div class="outlook-strip">'+cards+'</div>';
+  wrap.querySelectorAll('.ol-ev-btn').forEach(btn=>btn.addEventListener('click',()=>startChecklist(btn.dataset.tmpl)));
 }
 
 // ── CARRY TRAY ──
@@ -1883,6 +2034,9 @@ document.querySelectorAll('[data-page]').forEach(btn=>btn.addEventListener('clic
 // ── INIT ──
 function renderAll(){
   try{updateWeekVarsDisplay();}catch(e){console.error(e);}
+  try{renderPresenceBanner();}catch(e){console.error(e);}
+  try{renderSnapshotStrip();}catch(e){console.error(e);}
+  try{renderOutlookStrip();}catch(e){console.error(e);}
   try{renderCarryTray();}catch(e){console.error(e);}
   try{renderWeek();}catch(e){console.error(e);}
   try{renderLastWeek();}catch(e){console.error(e);}
