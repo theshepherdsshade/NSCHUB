@@ -24,6 +24,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 button{font-family:'Inter',sans-serif;cursor:pointer;}
 input,textarea,select{font-family:'Inter',sans-serif;}
 a{color:var(--blue);}
+.day-col,.event-card,.outlook-card,.briefing-strip,.about-card,.ctable,.carry-tray,.etd,.ts-item,.bd-item,.cal-ev-row,.hero-card,.hero-stat{box-shadow:0 1px 3px rgba(27,35,51,.05);}
+.day-col:hover,.event-card:hover{box-shadow:0 2px 8px rgba(27,35,51,.07);}
 
 /* ── TOPBAR ── */
 .topbar{background:var(--surface);border-bottom:1px solid var(--border);height:56px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40;flex-shrink:0;}
@@ -102,24 +104,6 @@ a{color:var(--blue);}
 .bn-label{font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);flex-shrink:0;min-width:76px;}
 .briefing-toggle{width:100%;background:none;border:none;border-top:1px solid var(--border);color:var(--text3);font-family:var(--mono);font-size:11px;font-weight:600;padding:7px 14px;text-align:left;cursor:pointer;transition:color .12s;}
 .briefing-toggle:hover{color:var(--text2);}
-
-/* ── UPCOMING STRIP ── */
-.upcoming-strip{display:flex;gap:10px;margin-bottom:16px;}
-.ue-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:flex;align-items:flex-start;gap:12px;flex:1;}
-.ue-card.warn{border-left:3px solid var(--amber);}
-.ue-card.alert{border-left:3px solid var(--red);}
-.ue-card.tent{opacity:.6;}
-.ue-left{flex:1;min-width:0;}
-.ue-name{font-size:14px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.ue-date{font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:3px;}
-.ue-right{text-align:right;flex-shrink:0;}
-.ue-days{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1;}
-.ue-days.r{color:var(--red);}
-.ue-days.a{color:var(--amber);}
-.ue-days.t{color:var(--blue);}
-.ue-dlbl{font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:2px;}
-.ue-tmpl{display:inline-flex;align-items:center;margin-top:8px;font-size:11px;font-weight:600;color:var(--blue);background:var(--blue-dim);padding:3px 9px;border-radius:4px;cursor:pointer;border:none;font-family:var(--mono);}
-.ue-tent{font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:3px;}
 
 /* ── CARRY TRAY ── */
 .carry-tray{background:var(--amb-dim);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:14px 16px;margin-bottom:16px;}
@@ -440,29 +424,46 @@ a{color:var(--blue);}
 .pb-chip{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--blue);background:var(--surface);border:1px solid rgba(37,99,235,.25);padding:2px 9px;border-radius:12px;white-space:nowrap;flex-shrink:0;}
 .presence-banner.urgent .pb-chip{color:var(--amber);border-color:rgba(217,119,6,.3);}
 
-/* ── SNAPSHOT STRIP ── */
-.snapshot-strip{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
-.snap-tile{flex:1;min-width:128px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px 14px;}
-.snap-label{font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:4px;}
-.snap-value{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--text);line-height:1.15;}
-.snap-value.a{color:var(--amber);}
-.snap-value.r{color:var(--red);}
-.snap-value.s{color:var(--green);}
-.snap-sub{font-size:11px;color:var(--text3);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+/* ── HERO ── */
+.hero-card{background:linear-gradient(160deg,var(--surface) 0%,var(--surf2) 100%);border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin-bottom:16px;}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.hero-greet{font-size:19px;font-weight:800;color:var(--text);letter-spacing:-.4px;}
+.hero-date{font-family:var(--mono);font-size:12px;color:var(--text3);margin-top:3px;}
+.hero-today-num{font-family:var(--mono);font-size:36px;font-weight:800;color:var(--text);line-height:1;text-align:right;}
+.hero-today-num .of{font-size:18px;color:var(--text3);font-weight:600;}
+.hero-today-lbl{font-family:var(--mono);font-size:10px;color:var(--text3);text-align:right;margin-top:3px;text-transform:uppercase;letter-spacing:.06em;}
+.hero-progress-track{height:6px;background:var(--surf3);border-radius:3px;overflow:hidden;margin-top:16px;}
+.hero-progress-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .3s,background .3s;}
+.hero-progress-fill.done{background:var(--green);}
+.hero-sub{font-size:12px;color:var(--text3);margin:7px 0 16px;}
+.hero-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.hero-stat{flex:1;min-width:110px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px 12px;}
+.hero-stat-lbl{font-family:var(--mono);font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);}
+.hero-stat-val{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--text);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hero-stat-val.a{color:var(--amber);}
+.hero-stat-val.r{color:var(--red);}
+.hero-focus{border-top:1px solid var(--border);padding-top:13px;}
+.hero-focus-lbl{font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:9px;}
+.hero-focus-item{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:14px;color:var(--text);}
+.hf-check{width:17px;height:17px;border-radius:4px;border:2px solid var(--border2);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;background:var(--surface);transition:all .15s;}
+.hf-check:hover{border-color:var(--blue);}
+.hf-check svg{width:10px;height:10px;opacity:0;}
+.hero-empty{font-size:13px;color:var(--text3);font-style:italic;}
 
 /* ── OUTLOOK ── */
 .outlook-strip{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
 .outlook-card{flex:1;min-width:220px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 15px;}
-.outlook-card.now{border-color:rgba(37,99,235,.35);box-shadow:0 0 0 1px rgba(37,99,235,.12);}
+.outlook-card.now{border-color:rgba(37,99,235,.35);box-shadow:0 0 0 1px rgba(37,99,235,.12),0 1px 3px rgba(27,35,51,.05);}
 .ol-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px;}
 .ol-when{font-size:13px;font-weight:700;color:var(--text);}
 .ol-range{font-family:var(--mono);font-size:10.5px;color:var(--text3);}
 .ol-sun{font-size:12.5px;color:var(--sage);font-weight:600;margin-bottom:5px;}
 .ol-mon{font-size:12px;color:var(--purple-c);margin-bottom:7px;}
 .ol-evs{display:flex;flex-direction:column;gap:4px;}
-.ol-ev{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--text2);}
-.ol-ev .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ol-ev{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text2);}
+.ol-ev .n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .ol-ev.tent{opacity:.6;font-style:italic;}
+.ol-urgent{font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--red);background:var(--red-dim);padding:1px 6px;border-radius:4px;flex-shrink:0;}
 .ol-ev-btn{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--blue);background:var(--blue-dim);border:none;border-radius:4px;padding:2px 7px;cursor:pointer;flex-shrink:0;}
 .ol-empty{font-size:12px;color:var(--text3);font-style:italic;}
 
@@ -482,7 +483,6 @@ a{color:var(--blue);}
   .bottom-nav{display:flex;}
   .main{padding:14px 12px 86px;}
   .week-lbl{display:none;}
-  .upcoming-strip{flex-direction:column;}
   .cal-grid{gap:2px;}
   .cal-cell{min-height:52px;padding:4px 5px;}
   .cal-dot{font-size:10px;}
@@ -491,8 +491,10 @@ a{color:var(--blue);}
   .di-del{opacity:1;}
   .presence-banner{padding:7px 12px;top:56px;}
   .pb-sub{display:none;}
-  .snapshot-strip{gap:8px;}
-  .snap-tile{min-width:44%;padding:9px 11px;}
+  .hero-card{padding:16px;}
+  .hero-today-num{font-size:30px;}
+  .hero-stats{gap:6px;}
+  .hero-stat{min-width:42%;padding:8px 10px;}
   .outlook-strip{flex-direction:column;}
 }
 @media print{
@@ -563,7 +565,6 @@ a{color:var(--blue);}
         <button class="briefing-toggle" id="briefingToggle">▾ Notes from Elizabeth & Central</button>
       </div>
       <div id="outlookStrip"></div>
-      <div id="upcomingStrip"></div>
       <div id="liveEventsWrap"></div>
       <div id="carryTrayWrap"></div>
       <div class="week-grid" id="weekGrid"></div>
@@ -1281,24 +1282,6 @@ document.getElementById('wvmSave').addEventListener('click',()=>{
   document.getElementById('weekVarsModal').classList.remove('open');toast('Week variables saved ✓');
 });
 
-// ── UPCOMING STRIP ──
-function renderUpcomingStrip(){
-  const wrap=document.getElementById('upcomingStrip');
-  const upcoming=getUpcomingEvents(14);
-  const next=upcoming[0];
-  if(next)document.getElementById('pulseNext').textContent=next.daysOut+'d: '+next.name.slice(0,14);
-  else document.getElementById('pulseNext').textContent='—';
-  if(!upcoming.length){wrap.innerHTML='';return;}
-  const cards=upcoming.slice(0,2).map(e=>{
-    const urg=e.daysOut<=2?'alert':e.daysOut<=5?'warn':'';
-    const dc=e.daysOut<=2?'r':e.daysOut<=5?'a':'t';
-    const tb=e.template?'<button class="ue-tmpl" data-tmpl="'+esc(e.template)+'">+ Start checklist</button>':'';
-    return '<div class="ue-card '+(e.tentative?'tent':urg)+'">'+'<div class="ue-left"><div class="ue-name">'+esc(e.name)+'</div><div class="ue-date">'+fmt(e.dateObj)+'</div>'+(e.tentative?'<div class="ue-tent">Tentative</div>':'')+tb+'</div>'+'<div class="ue-right"><div class="ue-days '+dc+'">'+e.daysOut+'</div><div class="ue-dlbl">days away</div></div></div>';
-  }).join('');
-  wrap.innerHTML='<div class="upcoming-strip">'+cards+'</div>';
-  wrap.querySelectorAll('.ue-tmpl').forEach(btn=>{btn.addEventListener('click',()=>startChecklist(btn.dataset.tmpl));});
-}
-
 // ── PRESENCE BANNER ──
 function fmtPresenceWhen(daysOut,d){
   if(daysOut===0)return 'Today';
@@ -1322,7 +1305,29 @@ function renderPresenceBanner(){
     '<span class="pb-chip">'+(next.daysOut===0?'today':next.daysOut+'d')+'</span>';
 }
 
-// ── WEEK SNAPSHOT ──
+// ── FOCUS (overdue/due-today items pulled from event checklists + today's priority routine tasks) ──
+function getFocusItems(){
+  const items=[];
+  const todayDay=WEEK.find(d=>d.dow===DOW);
+  if(todayDay){
+    todayDay.items.forEach((item,idx)=>{
+      if(item.priority&&!checked[DOW+'_'+idx])items.push({kind:'week',dow:DOW,idx,label:item.label});
+    });
+  }
+  const now=new Date();now.setHours(0,0,0,0);
+  eventChecklists.forEach(cl=>{
+    if(cl.archived)return;
+    cl.tasks.forEach(t=>{
+      if(t.done||!t.dueDate)return;
+      const due=new Date(t.dueDate+'T12:00:00');
+      const days=daysBetween(now,due);
+      if(days<=0)items.push({kind:'ec',clId:cl.id,taskId:t.id,label:t.label,overdue:days<0});
+    });
+  });
+  return items.slice(0,4);
+}
+
+// ── WEEK SNAPSHOT (HERO) ──
 function renderSnapshotStrip(){
   const wrap=document.getElementById('weekSnapshotStrip');if(!wrap)return;
   let total=0,done=0;
@@ -1338,19 +1343,48 @@ function renderSnapshotStrip(){
   if(todayDay)todayDay.items.forEach((item,idx)=>{if(!shouldShowItem(item,todayDay.dow))return;todayTotal++;if(checked[todayDay.dow+'_'+idx])todayDone++;});
   const nextEv=getUpcomingEvents(14)[0];
   const presence=getNextChurchPresence(1)[0];
-  wrap.innerHTML='<div class="snapshot-strip">'+
-    '<div class="snap-tile"><div class="snap-label">Today</div><div class="snap-value">'+todayDone+' / '+todayTotal+'</div><div class="snap-sub">tasks done</div></div>'+
-    '<div class="snap-tile"><div class="snap-label">Week progress</div><div class="snap-value'+(pct===100&&total?' s':'')+'">'+pct+'%</div><div class="snap-sub">'+done+' of '+total+' this week</div></div>'+
-    '<div class="snap-tile"><div class="snap-label">Carried over</div><div class="snap-value'+(carryItems.length?' a':'')+'">'+carryItems.length+'</div><div class="snap-sub">from last week</div></div>'+
-    '<div class="snap-tile"><div class="snap-label">To sort</div><div class="snap-value'+(toSort.length?' r':'')+'">'+toSort.length+'</div><div class="snap-sub">quick captures</div></div>'+
-    '<div class="snap-tile"><div class="snap-label">Next event</div><div class="snap-value" style="font-size:14px;">'+(nextEv?esc(nextEv.name.slice(0,18)):'—')+'</div><div class="snap-sub">'+(nextEv?nextEv.daysOut+' days away':'nothing on the radar')+'</div></div>'+
-    '<div class="snap-tile"><div class="snap-label">Next at church</div><div class="snap-value" style="font-size:14px;">'+(presence?esc(fmtPresenceWhen(presence.daysOut,presence.date)):'—')+'</div><div class="snap-sub">'+(presence?esc(presence.label.slice(0,26)):'')+'</div></div>'+
-    '</div>';
+  const focus=getFocusItems();
+  const greetHour=TODAY.getHours();
+  const greet=greetHour<12?'Good morning':greetHour<17?'Good afternoon':'Good evening';
+  wrap.innerHTML='<div class="hero-card">'+
+    '<div class="hero-top">'+
+      '<div><div class="hero-greet">'+greet+'</div><div class="hero-date">'+DAYS_S[TODAY.getDay()===0?6:TODAY.getDay()-1]+', '+fmt(TODAY)+'</div></div>'+
+      '<div><div class="hero-today-num">'+todayDone+'<span class="of">/'+todayTotal+'</span></div><div class="hero-today-lbl">done today</div></div>'+
+    '</div>'+
+    '<div class="hero-progress-track"><div class="hero-progress-fill'+(pct===100&&total?' done':'')+'" style="width:'+pct+'%"></div></div>'+
+    '<div class="hero-sub">'+pct+'% of this week done'+(carryItems.length?' · '+carryItems.length+' carried over':'')+(toSort.length?' · '+toSort.length+' to sort':'')+'</div>'+
+    '<div class="hero-stats">'+
+      '<div class="hero-stat"><div class="hero-stat-lbl">Next event</div><div class="hero-stat-val">'+(nextEv?esc(nextEv.name.slice(0,16))+' · '+nextEv.daysOut+'d':'—')+'</div></div>'+
+      '<div class="hero-stat"><div class="hero-stat-lbl">Next at church</div><div class="hero-stat-val">'+(presence?esc(fmtPresenceWhen(presence.daysOut,presence.date)):'—')+'</div></div>'+
+      '<div class="hero-stat"><div class="hero-stat-lbl">Carried over</div><div class="hero-stat-val'+(carryItems.length?' a':'')+'">'+carryItems.length+'</div></div>'+
+      '<div class="hero-stat"><div class="hero-stat-lbl">To sort</div><div class="hero-stat-val'+(toSort.length?' r':'')+'">'+toSort.length+'</div></div>'+
+    '</div>'+
+    '<div class="hero-focus">'+
+      '<div class="hero-focus-lbl">Focus right now</div>'+
+      (focus.length?focus.map(f=>'<div class="hero-focus-item"><div class="hf-check" data-fk="'+f.kind+'" data-fdow="'+(f.dow!==undefined?f.dow:'')+'" data-fidx="'+(f.idx!==undefined?f.idx:'')+'" data-fcl="'+(f.clId||'')+'" data-ft="'+(f.taskId||'')+'"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span>'+esc(f.label)+(f.kind==='ec'?(f.overdue?' <span class="tag pri" style="margin-left:4px;">Overdue</span>':' <span class="tag freq" style="margin-left:4px;">Due today</span>'):'')+'</span></div>').join('')
+      :'<div class="hero-empty">Nothing urgent — nice.</div>')+
+    '</div>'+
+  '</div>';
+  wrap.querySelectorAll('.hf-check').forEach(el=>el.addEventListener('click',()=>{
+    const kind=el.dataset.fk;
+    if(kind==='week'){
+      const dow=parseInt(el.dataset.fdow);const idx=parseInt(el.dataset.fidx);
+      checked[dow+'_'+idx]=true;scheduleSave();renderWeek();renderSnapshotStrip();
+    } else {
+      const cl=eventChecklists.find(c=>c.id===el.dataset.fcl);if(!cl)return;
+      const t=cl.tasks.find(t=>t.id===el.dataset.ft);if(!t)return;
+      t.done=true;scheduleSave();renderEventChecklists();renderSnapshotStrip();
+    }
+  }));
 }
 
 // ── 3-WEEK OUTLOOK ──
 function renderOutlookStrip(){
   const wrap=document.getElementById('outlookStrip');if(!wrap)return;
+  const nextEv=getUpcomingEvents(14)[0];
+  const pn=document.getElementById('pulseNext');
+  if(pn)pn.textContent=nextEv?nextEv.daysOut+'d: '+nextEv.name.slice(0,14):'—';
+  const todayStart=new Date(TODAY);todayStart.setHours(0,0,0,0);
   const labels=['This week','Next week','In 2 weeks'];
   const cards=[0,1,2].map(off=>{
     const s=getWeekSummary(off);
@@ -1363,7 +1397,11 @@ function renderOutlookStrip(){
       if(m.includes('Support Team'))return 'Support Team prep';
       return m;
     }).join(' · ');
-    const evRows=s.events.length?s.events.map(e=>'<div class="ol-ev'+(e.tentative?' tent':'')+'"><span class="n">'+esc(e.dayName)+' · '+esc(e.name)+'</span>'+(e.template?'<button class="ol-ev-btn" data-tmpl="'+esc(e.template)+'">+</button>':'')+'</div>').join(''):'<div class="ol-empty">No special events</div>';
+    const evRows=s.events.length?s.events.map(e=>{
+      const daysOut=off===0?daysBetween(todayStart,e.dateObj):null;
+      const urgent=daysOut!==null&&daysOut>=0&&daysOut<=2;
+      return '<div class="ol-ev'+(e.tentative?' tent':'')+'"><span class="n">'+esc(e.dayName)+' · '+esc(e.name)+'</span>'+(urgent?'<span class="ol-urgent">'+(daysOut===0?'today':daysOut+'d')+'</span>':'')+(e.template?'<button class="ol-ev-btn" data-tmpl="'+esc(e.template)+'">+</button>':'')+'</div>';
+    }).join(''):'<div class="ol-empty">No special events</div>';
     return '<div class="outlook-card'+(off===0?' now':'')+'">'+
       '<div class="ol-head"><span class="ol-when">'+labels[off]+'</span><span class="ol-range">'+esc(range)+'</span></div>'+
       '<div class="ol-sun">🌿 Sun: '+esc(sunLbl)+'</div>'+
@@ -2022,6 +2060,7 @@ function navigateTo(pageId){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+pageId).classList.add('active');
   document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===pageId));
+  if(pageId==='week'){renderSnapshotStrip();renderOutlookStrip();}
   if(pageId==='calendar')renderCalendar();
   if(pageId==='taskdue')renderTaskDue();
   if(pageId==='tosort')renderToSort();
@@ -2040,7 +2079,6 @@ function renderAll(){
   try{renderCarryTray();}catch(e){console.error(e);}
   try{renderWeek();}catch(e){console.error(e);}
   try{renderLastWeek();}catch(e){console.error(e);}
-  try{renderUpcomingStrip();}catch(e){console.error(e);}
   try{renderLiveEventTasks();}catch(e){console.error(e);}
   try{renderToSort();}catch(e){console.error(e);}
   try{renderBrainDump();}catch(e){console.error(e);}
